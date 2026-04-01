@@ -350,14 +350,22 @@ const StudentDashboard = ({ view = 'dashboard' }) => {
                                             </td>
                                             <td className="px-8 py-5 text-sm font-semibold text-gray-500">{new Date(cert.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</td>
                                             <td className="px-8 py-5">
-                                                <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-xl text-xs font-black uppercase tracking-widest border shadow-sm
-                                                    ${cert.status === 'approved' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' :
-                                                        cert.status === 'rejected' ? 'bg-rose-50 text-rose-700 border-rose-200' :
-                                                            'bg-amber-50 text-amber-700 border-amber-200'}`}>
-                                                    <div className={`w-1.5 h-1.5 rounded-full ${cert.status === 'approved' ? 'bg-emerald-500' : cert.status === 'rejected' ? 'bg-rose-500' : 'bg-amber-500 animate-pulse'}`}></div>
-                                                    {cert.status === 'pending' ? (
-                                                        cert.stage === 'faculty_review' ? 'Faculty Review' : 'HOD Review'
-                                                    ) : cert.status}
+                                                <div className="flex flex-col gap-2 relative group max-w-xs">
+                                                    <div className={`w-fit inline-flex items-center gap-2 px-4 py-1.5 rounded-xl text-xs font-black uppercase tracking-widest border shadow-sm
+                                                        ${cert.status === 'approved' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' :
+                                                            cert.status === 'rejected' ? 'bg-rose-50 text-rose-700 border-rose-200' :
+                                                                'bg-amber-50 text-amber-700 border-amber-200'}`}>
+                                                        <div className={`w-1.5 h-1.5 rounded-full ${cert.status === 'approved' ? 'bg-emerald-500' : cert.status === 'rejected' ? 'bg-rose-500' : 'bg-amber-500 animate-pulse'}`}></div>
+                                                        {cert.status === 'pending' ? (
+                                                            cert.stage === 'faculty_review' ? 'Faculty Review' : 'HOD Review'
+                                                        ) : cert.status}
+                                                    </div>
+                                                    {cert.remarks && cert.remarks.length > 0 && (
+                                                        <div className="text-[11px] font-medium text-gray-500 leading-tight">
+                                                            <span className="font-bold text-gray-400">Note: </span>
+                                                            <span className="italic">"{cert.remarks[cert.remarks.length - 1].comment}"</span>
+                                                        </div>
+                                                    )}
                                                 </div>
                                             </td>
                                             <td className="px-8 py-5 text-right">
